@@ -54,6 +54,10 @@ public class Constants {
 
     public static final char BLACK_KING = 'k';
 
+    public static final char BLACK_KNIGHT = 'n';
+
+    public static final char BLACK_BISHOP = 'b';
+
     public static final char EMPTY_CHAR = ' ';
 
     public static final float PAWN_VALUE = 1.0f;

@@ -37,6 +37,8 @@ public class Main {
                     if(Constants.SEARCH_DEPTH<=0){
                         Constants.SEARCH_DEPTH = 1;
                     }
+                }else if(contents[0].equalsIgnoreCase("moves")){
+                    System.out.println( ai.getOutput());
                 }else if(contents[0].length()==1){
                     if(contents[0].toLowerCase().charAt(0) == 'd'){
                         System.out.println(Util.printBoard(engine.board,flipped));
@@ -77,24 +79,22 @@ public class Main {
                         if (legal) {
                             ArrayList<int[]> legalMoves = engine.generateMove(engine.board[move[0][0]][move[0][1]],move[0],Util.getOffset(engine.board[move[0][0]][move[0][1]]));
                             for(int[] legalmove:legalMoves){
-                                if(Util.samePosition(legalmove,move[1])){
-                                    System.out.println(engine.move(new int[]{move[0][0],move[0][1],move[1][0],move[1][1]}));
+                                String legalmoveString = legalmove.length==2?Util.parseMove(new int[]{move[0][0],move[0][1],legalmove[0],legalmove[1]}):Util.parseMove(new int[]{move[0][0],move[0][1],legalmove[0],legalmove[1],legalmove[2]});
+                                //System.out.println(legalmoveString);
+                                if(legalmoveString.equalsIgnoreCase(contents[0].toLowerCase())){
+                                    String m = contents[0].length()==5?engine.move(new int[]{move[0][0],move[0][1],move[1][0],move[1][1],Integer.parseInt(Character.toString(contents[0].charAt(contents[0].length()-1)))}):engine.move(new int[]{move[0][0],move[0][1],move[1][0],move[1][1]});
+                                    System.out.println(m);
                                     String side = !engine.whiteToMove?"white : ":"black : ";
                                     System.out.println(side+engine.evaluateBoard(!engine.whiteToMove));
                                 }
                             }
                         }
                     } catch (Exception ex) {
-
+                        ex.printStackTrace();
                     }
                 }
             }else if(contents.length==2){
-                if(contents[0].equalsIgnoreCase("moves")){
-                    boolean white = contents[1].toLowerCase().charAt(0) == Constants.WHITE;
-                    String moves = ai.getOutput(white);
-                    System.out.println(moves);
-                    System.out.println(moves.split(" ").length);
-                }else if(contents[0].equalsIgnoreCase("evaluate")){
+                if(contents[0].equalsIgnoreCase("evaluate")){
                     boolean white = contents[1].toLowerCase().charAt(0) == Constants.WHITE;
                     System.out.println(engine.evaluateBoard(white));
                 }else if(contents[0].equalsIgnoreCase("go")){

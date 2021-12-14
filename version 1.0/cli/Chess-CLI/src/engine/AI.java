@@ -56,7 +56,6 @@ public class AI {
                         bestScore = bestMoves[i].finalscore;
                         best = bestMoves[i].bestMove;
                         leastDepth = bestMoves[i].leastDepthReached;
-                        System.out.println(leastDepth);
                     }
                 }
             }else{
@@ -68,7 +67,6 @@ public class AI {
                         bestScore = bestMoves[i].finalscore;
                         best = bestMoves[i].bestMove;
                         leastDepth = bestMoves[i].leastDepthReached;
-                        System.out.println(leastDepth);
                     }
                 }
             }
@@ -312,7 +310,7 @@ public class AI {
         return bestScore;
     }
 
-    public String getOutput(boolean white){
+    public String getOutput(){
         String moves="";
 
         ArrayList<int[]> legalmoves = engine.getLegalMoves();

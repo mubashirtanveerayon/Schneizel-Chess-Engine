@@ -33,8 +33,9 @@ public class AI {
             bestMoves[i].start();
         }
         boolean complete = false;
+        int count;
         while(!complete){
-            int count = 0;
+            count = 0;
             for(int i=0;i<bestMoves.length;i++){
                 if(!bestMoves[i].isAlive()){
                     count++;
@@ -56,7 +57,7 @@ public class AI {
                         bestScore = bestMoves[i].finalscore;
                         best = bestMoves[i].bestMove;
                         leastDepth = bestMoves[i].leastDepthReached;
-                        System.out.println(leastDepth);
+                        System.out.println("dep "+leastDepth);
                     }
                 }
             }else{
@@ -68,7 +69,7 @@ public class AI {
                         bestScore = bestMoves[i].finalscore;
                         best = bestMoves[i].bestMove;
                         leastDepth = bestMoves[i].leastDepthReached;
-                        System.out.println(leastDepth);
+                        System.out.println("dep "+leastDepth);
                     }
                 }
             }
