@@ -4,9 +4,9 @@ import java.io.File;
 
 public class Constants {
 
-    public static final int MIN_THREADS = 1;
+    //public static final int MIN_THREADS = 1;
 
-    public static final int MAX_THREADS = Runtime.getRuntime().availableProcessors();
+    //public static final int MAX_THREADS = Runtime.getRuntime().availableProcessors();
 
     public static final float PARTIAL_VALUE = 0.05f;
 
@@ -60,15 +60,15 @@ public class Constants {
 
     public static final char EMPTY_CHAR = ' ';
 
-    public static final float PAWN_VALUE = 1.0f;
+    public static final float PAWN_VALUE = 1.5f;
 
     public static final float KNIGHT_VALUE = 3.0f;
 
-    public static final float BISHOP_VALUE = 3.5f;
+    public static final float BISHOP_VALUE = 3.0f;
 
     public static final float ROOK_VALUE = 5.5f;
 
-    public static final float QUEEN_VALUE = 9.0f;
+    public static final float QUEEN_VALUE = 8.5f;
 
     public static final float KING_VALUE = 1.0f;
 

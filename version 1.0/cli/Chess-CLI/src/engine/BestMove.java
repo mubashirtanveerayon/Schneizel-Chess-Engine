@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 public class BestMove extends Thread{
 
+    //public String eval_text = "";
+
     public Engine engine;
     public ArrayList<int[]> legalMoves;
     public int size;
@@ -51,7 +53,9 @@ public class BestMove extends Thread{
         }
         else if(depth==0){
             depthReached = depth;
-            return engine.evaluateBoard(false);
+            float eval = engine.evaluateBoard(false);
+            //eval_text+=engine.fen+" | "+eval+"\n";
+            return eval;
         }
         float score,bestScore = maximizing?Float.NEGATIVE_INFINITY:Float.POSITIVE_INFINITY;
         char[][] prevBoardChars = Util.copyBoard(engine.board);

@@ -4,9 +4,9 @@ import java.io.File;
 
 public class Constants {
 
-    public static final int MIN_THREADS = 1;
+    //public static final int MIN_THREADS = 1;
 
-    public static final int MAX_THREADS = Runtime.getRuntime().availableProcessors();
+    //public static final int MAX_THREADS = Runtime.getRuntime().availableProcessors();
 
     public static final float PARTIAL_VALUE = 0.05f;
 
