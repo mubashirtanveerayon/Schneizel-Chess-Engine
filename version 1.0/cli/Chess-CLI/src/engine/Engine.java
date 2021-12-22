@@ -28,7 +28,7 @@ public class Engine {
     public String fen;
 
     int evalFile,evalRank;
-
+    
     public Engine(String fen){
         this.fen = fen;
         history = fen;
@@ -75,6 +75,8 @@ public class Engine {
                         board[move[2]][move[3]] = Constants.BLACK_BISHOP;
                     } else if (move[4] == 3) {
                         board[move[2]][move[3]] = Constants.BLACK_ROOK;
+                    }else{
+                        board[move[2]][move[3]] = Constants.BLACK_QUEEN;
                     }
                 }else{
                     board[move[2]][move[3]] = Constants.BLACK_QUEEN;
