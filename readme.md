@@ -110,5 +110,5 @@ or,
 evaluate;b
 ```
 
-## What not to expect
+## About the engine
 This is not a uci chess engine. The ai is pretty weak compared to stockfish or other chess engines out there as it uses a static evaluation function. I might implement neural network and other better approaches to make the A.I stronger in the future.
