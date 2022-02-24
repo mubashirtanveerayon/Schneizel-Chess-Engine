@@ -74,13 +74,13 @@ public class Board {
             }
         }
         if(!engine.lastMove.isEmpty()){
-            int[][] lastMove = Util.parseMove(engine.lastMove);
+            int[] lastMove = Util.parseMove(engine.lastMove);
             if(Parameters.FLIP){
-                boardSquares[Constants.COLUMNS-1-lastMove[0][0]][Constants.ROWS-1-lastMove[0][1]].setBackground(new Color(0,100,70));
-                boardSquares[Constants.COLUMNS-1-lastMove[1][0]][Constants.ROWS-1-lastMove[1][1]].setBackground(new Color(0,100,70));
+                boardSquares[Constants.COLUMNS-1-lastMove[0]][Constants.ROWS-1-lastMove[1]].setBackground(new Color(0,100,70));
+                boardSquares[Constants.COLUMNS-1-lastMove[2]][Constants.ROWS-1-lastMove[3]].setBackground(new Color(0,100,70));
             }else{
-                boardSquares[lastMove[0][0]][lastMove[0][1]].setBackground(new Color(0,100,70));
-                boardSquares[lastMove[1][0]][lastMove[1][1]].setBackground(new Color(0,100,70));
+                boardSquares[lastMove[0]][lastMove[1]].setBackground(new Color(0,100,70));
+                boardSquares[lastMove[2]][lastMove[3]].setBackground(new Color(0,100,70));
             }
         }
     }

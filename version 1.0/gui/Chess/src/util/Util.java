@@ -30,14 +30,7 @@ public class Util {
     }
 
     public static boolean samePosition(int[] a, int[] b) {
-        if(a.length == b.length){
-            if(a.length==3) {
-                return a[0] == b[0] && a[1] == b[1] && a[2] == b[2];
-            }else {
-                return a[0] == b[0] && a[1] == b[1];
-            }
-        }
-        return false;
+        return a[0] == b[0] && a[1] == b[1];
     }
 
     public static boolean isAlly(char ch1, char ch2) {
@@ -113,45 +106,70 @@ public class Util {
         return nList;
     }
 
-    public static int[] cvtPosition(String strPos) {
-        strPos = strPos.toLowerCase();
-        int file, rank;
-        try {
-            file = Constants.FILES.indexOf(strPos.charAt(0));
-            rank = Constants.RANKS.indexOf(strPos.charAt(1));
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            file = -1;
-            rank = -1;
-        }
-        return new int[]{file, rank};
-    }
-
-    public static String toString(int[] position) {
-        String file = String.valueOf(Constants.FILES.charAt(position[0]));
-        String rank = String.valueOf(Constants.RANKS.charAt(position[1]));
-        return file + rank;
+//    public static int[] cvtPosition(String strPos) {
+//        strPos = strPos.toLowerCase();
+//        int file, rank;
+//        try {
+//            file = Constants.FILES.indexOf(strPos.charAt(0));
+//            rank = Constants.RANKS.indexOf(strPos.charAt(1));
+//        } catch (ArrayIndexOutOfBoundsException ex) {
+//            file = -1;
+//            rank = -1;
+//        }
+//        return new int[]{file, rank};
+//    }
+//
+//    public static String toString(int[] position) {
+//        String file = String.valueOf(Constants.FILES.charAt(position[0]));
+//        String rank = String.valueOf(Constants.RANKS.charAt(position[1]));
+//        return file + rank;
+//    }
+//    
+//    public static int[][] parseMove(String pos){
+//        int[] initPosition = cvtPosition(new StringBuffer(pos).delete(2, pos.length()).toString());
+//        int[] finalPosition = null;
+//        if(pos.length()==5) {
+//            finalPosition = cvtPosition(Character.toString(pos.charAt(2)) + Character.toString(pos.charAt(3)));
+//        }
+//        else { finalPosition = cvtPosition(new StringBuffer(pos).delete(0, 2).toString());}
+//
+//        return new int[][]{initPosition,finalPosition};
+//    }
+//
+//    public static String parseMove(int[] from,int[] to){
+//        return toString(from)+toString(to);
+//    }
+//
+//    public static String parseMove(int[] move ){
+//        if(move.length == 5){
+//            return toString(new int[]{move[0],move[1]})+toString(new int[]{move[2],move[3]})+String.valueOf(move[4]);
+//        }
+//        return toString(new int[]{move[0],move[1]})+toString(new int[]{move[2],move[3]});
+//    }
+    
+    public static String cvtPosition(int file,int rank){
+        return String.valueOf(Constants.FILES.charAt(file))
+                + String.valueOf(Constants.RANKS.charAt(rank));
     }
     
-    public static int[][] parseMove(String pos){
-        int[] initPosition = cvtPosition(new StringBuffer(pos).delete(2, pos.length()).toString());
-        int[] finalPosition = null;
-        if(pos.length()==5) {
-            finalPosition = cvtPosition(Character.toString(pos.charAt(2)) + Character.toString(pos.charAt(3)));
-        }
-        else { finalPosition = cvtPosition(new StringBuffer(pos).delete(0, 2).toString());}
-
-        return new int[][]{initPosition,finalPosition};
+    public static int[] parsePosition(String strposition){
+        return new int[]{Constants.FILES.indexOf(strposition.charAt(0)),Constants.RANKS.indexOf(strposition.charAt(1))};
     }
-
-    public static String parseMove(int[] from,int[] to){
-        return toString(from)+toString(to);
-    }
-
-    public static String parseMove(int[] move ){
-        if(move.length == 5){
-            return toString(new int[]{move[0],move[1]})+toString(new int[]{move[2],move[3]})+String.valueOf(move[4]);
+    
+    public static String cvtMove(int[] move){
+        if(move.length==5){
+            return cvtPosition(move[0],move[1])+cvtPosition(move[2],move[3])+Integer.toString(move[4]);
+        }else{
+            return cvtPosition(move[0],move[1])+cvtPosition(move[2],move[3]);
         }
-        return toString(new int[]{move[0],move[1]})+toString(new int[]{move[2],move[3]});
+    }
+    
+    public static int[] parseMove(String strmove){
+        if(strmove.length()==5){
+            return new int[]{Constants.FILES.indexOf(strmove.charAt(0)),Constants.RANKS.indexOf(strmove.charAt(1)),Constants.FILES.indexOf(strmove.charAt(2)),Constants.RANKS.indexOf(strmove.charAt(3)),Integer.parseInt(Character.toString(strmove.charAt(4)))};
+        }else{
+            return new int[]{Constants.FILES.indexOf(strmove.charAt(0)),Constants.RANKS.indexOf(strmove.charAt(1)),Constants.FILES.indexOf(strmove.charAt(2)),Constants.RANKS.indexOf(strmove.charAt(3))};
+        }
     }
 
     public static int[] getKingPosition(char[][] boardChars,boolean white){

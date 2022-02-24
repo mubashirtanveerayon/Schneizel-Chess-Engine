@@ -128,7 +128,7 @@ public class GamePanel extends JPanel implements ActionListener {
                 long start = System.nanoTime();
                 try{
                     int[] bestMove = ai.BestMove();
-                    System.out.println("Best Move "+Util.parseMove(bestMove));
+                    System.out.println("Best Move "+Util.cvtMove(bestMove));
                     if(engine.board[bestMove[2]][bestMove[3]]!=Constants.EMPTY_CHAR){
                         playAudio(1);
                     }else{

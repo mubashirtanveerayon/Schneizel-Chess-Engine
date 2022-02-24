@@ -7,7 +7,7 @@ import javax.swing.*;
 
 public class Main extends JFrame{
 	public static void main(String[] args){
-		int response = JOptionPane.showConfirmDialog(null,"Welcome "+System.getProperty("user.name")+" to a game of chess! Do you want to play as white? (selecting 'No' means you'll play as black)","Welcome",JOptionPane.YES_NO_OPTION);
+		int response = JOptionPane.showConfirmDialog(null,"Welcome "+System.getProperty("user.name")+" to a game of chess! Do you want to play as white? (selecting 'No' means you'll be playing as black)","Welcome",JOptionPane.YES_NO_OPTION);
 		Parameters.HUMAN_CHOSE_WHITE = response == JOptionPane.YES_OPTION;
 		Main main = new Main();
 		main.setSize(600,500);

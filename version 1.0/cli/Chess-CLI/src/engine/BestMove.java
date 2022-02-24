@@ -3,13 +3,9 @@ package engine;
 import util.Constants;
 import util.Util;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class BestMove extends Thread{
-
-    //public String eval_text = "";
 
     public Engine engine;
     public ArrayList<int[]> legalMoves;
@@ -49,13 +45,12 @@ public class BestMove extends Thread{
            return Float.NEGATIVE_INFINITY;
        }
        else if(engine.fullMove>=100){
+           depthReached = depth;
            return 0.0f;
        }
        else if(depth==0){
            depthReached = depth;
-           float eval = engine.evaluateBoard(false);
-           //eval_text+=engine.fen+" | "+eval+"\n";
-           return eval;
+           return engine.evaluateBoard(false);
        }
        float score,bestScore = maximizing?Float.NEGATIVE_INFINITY:Float.POSITIVE_INFINITY;
        char[][] prevBoardChars = Util.copyBoard(engine.board);
@@ -360,13 +355,10 @@ public class BestMove extends Thread{
                                                    if(beta<=alpha){
                                                        return bestScore;
                                                    }
-                                                   //System.out.println(c+" "+i+","+j+" "+file+","+rank);
-                                                   //checking promotions
                                                    if((Util.isUpperCase(c)&&rank == 0)||(!Util.isUpperCase(c)&&rank == 7)){
                                                        for(int k=1;k<4;k++){
                                                            engine.move(new int[]{i,j,file,rank,k});
                                                            score = minimax(alpha,beta,depth-1,!maximizing);
-                                                           //System.out.println(k+" "+score);
                                                            if(maximizing){
                                                                bestScore = Math.max(score,bestScore);
                                                                alpha = Math.max(alpha,score);
@@ -403,7 +395,7 @@ public class BestMove extends Thread{
                            }
                            String enPassant = engine.fen.split(" ")[3];
                            if(!enPassant.equals("-")){
-                               int[] enPassantSquare = Util.cvtPosition(enPassant);
+                               int[] enPassantSquare = Util.parsePosition(enPassant);
                                if(Math.abs(i-enPassantSquare[0]) == 1 && Math.abs(j-enPassantSquare[1]) == 1){
                                    char piece = engine.board[enPassantSquare[0]][j];
                                    engine.board[enPassantSquare[0]][j] = Constants.EMPTY_CHAR;

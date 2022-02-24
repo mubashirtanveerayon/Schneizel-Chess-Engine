@@ -45,7 +45,7 @@ public class Engine {
             return fen;
         }
         history=fen;
-        lastMove=Util.parseMove(new int[]{move[0],move[1],move[2],move[3]});
+        lastMove=Util.cvtMove(move);
         halfMove++;
         if(!whiteToMove){
             fullMove++;
@@ -69,26 +69,38 @@ public class Engine {
         board[move[0]][move[1]] = Constants.EMPTY_CHAR;
         if(move[3] == 7 && board[move[2]][move[3]] == Constants.BLACK_PAWN){
                 if(move.length == 5) {
-                    if (move[4] == 1) {
-                        board[move[2]][move[3]] = Constants.BLACK_KNIGHT;
-                    } else if (move[4] == 2) {
-                        board[move[2]][move[3]] = Constants.BLACK_BISHOP;
-                    } else if (move[4] == 3) {
-                        board[move[2]][move[3]] = Constants.BLACK_ROOK;
-                    }else{
-                        board[move[2]][move[3]] = Constants.BLACK_QUEEN;
+                    switch (move[4]) {
+                        case 1:
+                            board[move[2]][move[3]] = Constants.BLACK_KNIGHT;
+                            break;
+                        case 2:
+                            board[move[2]][move[3]] = Constants.BLACK_BISHOP;
+                            break;
+                        case 3:
+                            board[move[2]][move[3]] = Constants.BLACK_ROOK;
+                            break;
+                        default:
+                            board[move[2]][move[3]] = Constants.BLACK_QUEEN;
+                            break;
                     }
                 }else{
                     board[move[2]][move[3]] = Constants.BLACK_QUEEN;
                 }
         }else if(move[3] == 0 && board[move[2]][move[3]] == Constants.WHITE_PAWN){
                 if(move.length == 5) {
-                    if (move[4] == 1) {
-                        board[move[2]][move[3]] = Constants.WHITE_KNIGHT;
-                    } else if (move[4] == 2) {
-                        board[move[2]][move[3]] = Constants.WHITE_BISHOP;
-                    } else if (move[4] == 3) {
-                        board[move[2]][move[3]] = Constants.WHITE_ROOK;
+                    switch (move[4]) {
+                        case 1:
+                            board[move[2]][move[3]] = Constants.WHITE_KNIGHT;
+                            break;
+                        case 2:
+                            board[move[2]][move[3]] = Constants.WHITE_BISHOP;
+                            break;
+                        case 3:
+                            board[move[2]][move[3]] = Constants.WHITE_ROOK;
+                            break;
+                        default:
+                            board[move[2]][move[3]] = Constants.WHITE_QUEEN;
+                            break;
                     }
                 }else{
                     board[move[2]][move[3]] = Constants.WHITE_QUEEN;
@@ -448,7 +460,7 @@ public class Engine {
                 }
                 String enPassant = fen.split(" ")[3];
                 if(!enPassant.equals("-")){
-                    int[] enPassantSquare = Util.cvtPosition(enPassant);
+                    int[] enPassantSquare = Util.parsePosition(enPassant);
                     if(Math.abs(position[0]-enPassantSquare[0]) == 1 && Math.abs(position[1]-enPassantSquare[1]) == 1){
                         char piece = board[enPassantSquare[0]][position[1]];
                         board[enPassantSquare[0]][position[1]] = Constants.EMPTY_CHAR;
@@ -597,21 +609,16 @@ public class Engine {
         if (lastMove.isEmpty()) {
             return history.split(" ")[3];
         } else {
-            String lastMoveStr = lastMove;
 
-            int[][] lastMove = Util.parseMove(lastMoveStr);
+            int[] last = Util.parseMove(lastMove);
 
-            int[] initPosition = lastMove[0];
-            int[] lastPosition = lastMove[1];
-
-            if (Util.toUpper(board[lastPosition[0]][lastPosition[1]]) == Constants.WHITE_PAWN) {
-                int rDiff = Math.abs(lastPosition[1] - initPosition[1]);
-                if (rDiff == 2) {
-                    sb.append(Constants.FILES.charAt(lastPosition[0]));
-                    if (Util.isUpperCase(board[lastPosition[0]][lastPosition[1]])) {
-                        sb.append(Constants.RANKS.charAt(lastPosition[1] + 1));
+            if (Util.toUpper(board[last[2]][last[3]]) == Constants.WHITE_PAWN) {
+                if (Math.abs(last[1] - last[3]) == 2) {
+                    sb.append(Constants.FILES.charAt(last[2]));
+                    if (Util.isUpperCase(board[last[2]][last[3]])) {
+                        sb.append(Constants.RANKS.charAt(last[3] + 1));
                     } else {
-                        sb.append(Constants.RANKS.charAt(lastPosition[1] - 1));
+                        sb.append(Constants.RANKS.charAt(last[3] - 1));
                     }
                 } else {
                     sb.append("-");
