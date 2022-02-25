@@ -199,3 +199,9 @@ evaluate;b
 
 ## About the engine
 This is not a uci chess engine. The ai is pretty weak compared to stockfish or other chess engines out there as it uses a static evaluation function. I might implement neural network and other better approaches to make the A.I stronger in the future.
+
+## Copyright 2021 (c) Mubashir Tanveer Ayon
+
+## Copyright notice:
+
+### You may not use this code for commercial purpose!
