@@ -59,7 +59,7 @@ int[] move = engine.parseMove(moveStr);
 engine.makeMove(moveStr);
 ```
 
-The move String should like this:
+The move String should look like this:
 
 ```
 <from_file><from_rank><to_file><to_rank>
