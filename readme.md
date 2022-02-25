@@ -83,20 +83,18 @@ Examples:
 
 ```sh
 String moveStr = "a2a4"; // from square a2 to square a4
-moveStr = "a7a8"; // pawn peomotion to queen from square a2 to square a4
-moveStr = "a7a81"; // pawn peomotion to knight from square a2 to square a4
-moveStr = "a7a82"; // pawn peomotion to bishop from square a2 to square a4
-moveStr = "a7a83"; // pawn peomotion to rook from square a2 to square a4
-```
+moveStr = "a7a8"; // pawn peomotion to queen from square a7 to square a8
+moveStr = "a7a81"; // pawn peomotion to knight from square a7 to square a8
+moveStr = "a7a82"; // pawn peomotion to bishop from square a7 to square a8
+moveStr = "a7a83"; // pawn peomotion to rook from square a7 to square a8
 
-### Get all legal moves possible for a given board position:
+### Get all legal moves for a given board position:
 
 ```sh
 String legalMoves = engine.getLegalMoves();
 ```
 
-The `getLegalMoves()` method returns a String stating all possible moves in String format.
-Individual move String can be found using the `split(regex)` method of java.lang.String class as the move Strings are added to the result string seperated by new lines.
+The `getLegalMoves()` method returns a sum of all legal move string. Individual move String can be found using the `split(regex)` method of java.lang.String class as the move Strings are added to the resulting string seperated by new lines.
 
 The following example shows how to get all move Strings seperated in an array:
 
@@ -105,7 +103,7 @@ String legalMoves = engine.getLegalMoves();
 String[] legalMovesStr = legalMoves.split("\n");
 ```
 
-#### Threre are many other useful methods all of which are self explanatory. One can easily find  those out by going through the `schneizel.Schneizel` class. An example project of the _Schneizel Chess Engine_ can be found [here](https://github.com/mubashirtanveerayon/My-Games/tree/master/Chess%20Game)
+#### Threre are many other useful methods all of which are self explanatory. One can easily find  those out by going through the `schneizel.Schneizel` class. An example project of the _Schneizel Chess Engine_ can be found [here](https://github.com/mubashirtanveerayon/My-Games/tree/master/Chess%20Game).
 
 ## Usage(CLI)
 
@@ -198,7 +196,7 @@ evaluate;b
 ```
 
 ## About the engine
-This is not a uci chess engine. The ai is pretty weak compared to stockfish or other chess engines out there as it uses a static evaluation function. I might implement neural network and other better approaches to make the A.I stronger in the future.
+This is not a uci chess engine. The ai is pretty weak compared to stockfish or other chess engines out there as it uses a static evaluation function. I might implement neural network and other better approaches to make the A.I stronger in future.
 
 ## License
 
