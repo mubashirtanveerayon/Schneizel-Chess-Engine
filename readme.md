@@ -87,6 +87,7 @@ moveStr = "a7a8"; // pawn peomotion to queen from square a7 to square a8
 moveStr = "a7a81"; // pawn peomotion to knight from square a7 to square a8
 moveStr = "a7a82"; // pawn peomotion to bishop from square a7 to square a8
 moveStr = "a7a83"; // pawn peomotion to rook from square a7 to square a8
+```
 
 ### Get all legal moves for a given board position:
 
