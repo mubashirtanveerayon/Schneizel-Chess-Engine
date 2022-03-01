@@ -5,19 +5,19 @@ import engine.*;
 import java.util.ArrayList;
 
 public class Schneizel {
-    
-    
+
+
     public ArrayList<String> history;
 
     public ArrayList<int[]> moves;
-    
+
     private Engine engine;
     private AI ai;
-    
+
     private void printInfo(){
         System.out.println("Schneizel Chess Engine v1.0 27 December, 2021");
     }
-    
+
     public Schneizel(String fen){
         engine = new Engine(fen);
         ai = new AI(engine);
@@ -26,7 +26,7 @@ public class Schneizel {
         history.add(engine.fen);
         printInfo();
     }
-    
+
     public Schneizel(){
         engine = new Engine(Constants.STARTING_FEN);
         ai = new AI(engine);
@@ -35,7 +35,7 @@ public class Schneizel {
         history.add(engine.fen);
         printInfo();
     }
-    
+
     public int[] getBestMove(){
         return ai.BestMove();
     }
@@ -65,25 +65,32 @@ public class Schneizel {
     public float evaluateBoard(boolean white){
         return engine.evaluateBoard(white);
     }
-    
+
     public float evaluateBoard(){
         return engine.evaluateBoard(engine.whiteToMove);
     }
-    
-    public void makeMove(String movestr){
+
+    public boolean isValidMove(String moveStr){
         String legalMoves = getLegalMoves();
         for(String move:legalMoves.split("\n")){
-            if(move.equalsIgnoreCase(movestr)){
-                history.add(engine.fen);
-                int[] moveint = Util.parseMove(movestr);
-                engine.move(moveint);
-                moves.add(moveint);
-                return;
+            if(!moveStr.isEmpty()&&!move.isEmpty()&&move.equalsIgnoreCase(moveStr)){
+                return true;
             }
-        }       
+        }
+        return false;
+    }
+
+    public void makeMove(String movestr){
+        if(isValidMove(movestr)){
+            history.add(engine.fen);
+            int[] moveint = Util.parseMove(movestr);
+            engine.move(moveint);
+            moves.add(moveint);
+            return;
+        }
         System.out.println("Not a legal move!");
     }
-    
+
     public void undoMove(){
         if(history.size()!=0){
             engine = new Engine(history.get(history.size()-1));
@@ -92,11 +99,11 @@ public class Schneizel {
             moves.remove(moves.size()-1);
         }
     }
-    
+
     public void setDifficulty(int depth){
         Constants.SEARCH_DEPTH = depth;
     }
-    
+
     public int getDifficulty(){
         return Constants.SEARCH_DEPTH;
     }
@@ -109,11 +116,11 @@ public class Schneizel {
     public String getFen(){
         return engine.fen;
     }
-    
+
     public boolean isDraw(){
       return engine.isDraw();
     }
-    
+
     public String getState(){
       if(engine.checkMate(engine.whiteToMove)){
          return engine.whiteToMove?"b":"w";
@@ -185,5 +192,5 @@ public class Schneizel {
         return Util.getKingPosition(engine.board,white);
     }
 
-    
+
 }

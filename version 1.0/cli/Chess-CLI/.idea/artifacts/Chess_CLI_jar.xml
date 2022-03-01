@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Chess-CLI:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Chess_CLI_jar</output-path>
+    <root id="archive" name="Chess-CLI.jar">
+      <element id="module-output" name="Chess-CLI" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/Schneizel_v1.0.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
