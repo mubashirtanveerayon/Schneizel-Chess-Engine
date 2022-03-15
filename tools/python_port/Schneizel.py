@@ -1,56 +1,84 @@
+import os
+import errno
 import subprocess
 
+def _get_file():
+    jar_file = "Schneizel_cli.jar"
+    path = os.path.join(os.path.dirname(__file__), jar_file)
+
+    # you have to write code which will auto download the Schneizel_cli.jar file
+    if not os.path.exists(path):
+        raise FileNotFoundError(
+            errno.ENOENT,
+            os.strerror(errno.ENOENT),
+            jar_file
+            )
+
+    return path
+
 class Schneizel:
-    def __init__(self,path_:str):
-        self.path = path_
-        self.process = subprocess.Popen("java -jar Schneizel_cli.jar",
+    def __init__(self, path=None):
+
+        if path is None:
+            self.path = _get_file()
+        else:
+            self.path = path
+
+        self.process = subprocess.Popen(f"java -jar \"{self.path}\"",
             universal_newlines=True,
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT)
-        self.valid_print_chars = ["+","-","|"]
 
-    def _put(self,command):
-        self.process.stdin.write(f"{command}\n")
-        self.process.stdin.flush()
+        self.command_put = False
+        #self.process.stdout.readline()
+        self.VERSION = self.get_version()
+        self.VERSION = float(self.get_version())
+
+    def _put(self, command):
+        self.command_put = self.process.poll() is None
+        if self.command_put:
+            self.process.stdin.write(f"{command}\n")
+            self.process.stdin.flush()
 
     def _readline(self):
-        return self.process.stdout.readline()
+        return None if not self.command_put else self.process.stdout.readline()
 
     def get_fen(self):
-        fen = ""
-        while not "/" in fen:
-            self._put("fen")
-            fen = self._readline()
+        self._put("fen")
+        fen = self._readline()
         return fen
 
     def get_best_move(self):
-        best_move = ""
-        while not "best move" in best_move:
-            self._put("go")
-            best_move = self._readline()
-        best_move = best_move.split(" ")[3]
-        return best_move.strip()
+        self._put("go")
+        return self._readline().split(" ")[3].strip()
 
-    def make_move(self,move):
+    def make_move(self, move):
         if len(move) >= 4:
             self._put(move)
             return self._readline() != ''
         return False
 
     def play_best_move(self):
-        self.make_move(self.get_best_move().strip())
+        self._put("play")
+    
+    def get_board_visual(self) -> str:
+        self._put("d")
+        return ''.join(list(filter((str("\n")).__ne__, [self._readline() for i in range(22)][1:])))
 
-    def print_board(self):
-        i = 0
-        board = ""
-        temp = ""
-        while i != 17:
-            self._put("d")
-            temp = self._readline()
-            for c in temp:
-                if c in self.valid_print_chars:
-                    board += temp
-                    i = i+1
-                    break
-        print(board)
+    def get_version(self):
+        self._put("v")
+        return self._readline().strip()
+
+if __name__ == "__main__":
+    engine = Schneizel()
+
+    print(engine.VERSION)
+    while True:
+        print(engine.get_board_visual())
+        print(engine.get_fen())
+        p = input("Enter yout move: ")
+        engine.make_move(p)
+        engine.play_best_move()
+        print("\n##################################################\n")
+
