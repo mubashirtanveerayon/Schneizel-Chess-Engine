@@ -198,7 +198,7 @@ evaluate;b
 
 ## About the engine
 This is not a uci supported chess engine. The ai is very weak compared to stockfish or other chess engines out there as it uses classic evaluation.
-The engine is getting a [re-write](https://github.com/mubashirtanveerayon/Schneizel-Rewrite) soon.
+The engine is getting a [re-write](https://github.com/mubashirtanveerayon/Schneizel-v2) soon.
 
 ## License
 
