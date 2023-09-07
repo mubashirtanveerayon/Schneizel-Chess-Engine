@@ -24,24 +24,28 @@ public class UCI {
                     System.out.println("id name Schneizel 1\nid author see AUTHORS file\nuciok");
                     break;
                 case "go":
+                    int prevDepth = Constants.SEARCH_DEPTH;
+                    if(partsBySpace.length == 3) {
+                        Constants.SEARCH_DEPTH = Integer.parseInt(partsBySpace[2]);
+                    }
                     String bestMoveStr = engine.cvtMove(engine.getBestMove());
 
                     int[] move = Util.parseMove(bestMoveStr);
 
-                    boolean pawnPromotion =(( engine.getTurn() == Constants.WHITE && move[3] == 0)||( engine.getTurn()!= Constants.WHITE && move[3] == 7)) && (Character.toUpperCase(engine.getBoard()[move[0]][move[1]]) == Constants.WHITE_PAWN);
-                    if(pawnPromotion){
-                        if(move.length == 4){
-                            bestMoveStr = bestMoveStr.substring(0,4) + "Q";
-                        }else if(move[4] == 1){
-                            bestMoveStr = bestMoveStr.substring(0,4) + "N";
-                        }else if(move[4] == 2){
-                            bestMoveStr = bestMoveStr.substring(0,4) + "B";
-                        }else if(move[4] == 3){
-                            bestMoveStr = bestMoveStr.substring(0,4) + "R";
+                    boolean pawnPromotion = ((engine.getTurn() == Constants.WHITE && move[3] == 0) || (engine.getTurn() != Constants.WHITE && move[3] == 7)) && (Character.toUpperCase(engine.getBoard()[move[0]][move[1]]) == Constants.WHITE_PAWN);
+                    if (pawnPromotion) {
+                        if (move.length == 4) {
+                            bestMoveStr = bestMoveStr.substring(0, 4) + "Q";
+                        } else if (move[4] == 1) {
+                            bestMoveStr = bestMoveStr.substring(0, 4) + "N";
+                        } else if (move[4] == 2) {
+                            bestMoveStr = bestMoveStr.substring(0, 4) + "B";
+                        } else if (move[4] == 3) {
+                            bestMoveStr = bestMoveStr.substring(0, 4) + "R";
                         }
                     }
-
-                    System.out.println("bestmove "+bestMoveStr);
+                    Constants.SEARCH_DEPTH = prevDepth;
+                    System.out.println("bestmove " + bestMoveStr);
                     break;
                 case "isready":
                     System.out.println("readyok");
@@ -55,9 +59,10 @@ public class UCI {
                         fen = Constants.STARTING_FEN;
                     }else{
                         for(int i=2;i< partsBySpace.length;i++){
-                            fen += partsBySpace[2];
+                            fen += partsBySpace[i] + " ";
                         }
                     }
+                    fen = fen.trim();
                     engine = new Schneizel(fen);
                     if(input.contains("moves")){
                         for(int i=3;i< partsBySpace.length;i++){

@@ -42,7 +42,7 @@ public class Engine {
         if(!legal){
             return fen;
         }
-        System.out.println();
+        //System.out.println();
         history=fen;
         lastMove=Util.cvtMove(move);
         halfMove++;

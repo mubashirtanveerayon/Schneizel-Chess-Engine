@@ -35,7 +35,7 @@ public class AI {
                 }
             }
             complete = count == bestMoves.length;
-            System.out.print("");
+            //System.out.print("");
         }
         int[] best=null;
         int leastDepth = -1;
