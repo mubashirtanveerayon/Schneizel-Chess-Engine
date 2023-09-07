@@ -34,7 +34,7 @@ public class Main{
                         System.out.println(engine.getFen());
                     }else if(content[0].equalsIgnoreCase("go")){
                         String bestMoveStr = engine.cvtMove(engine.getBestMove());
-                        System.out.println("Found best move: "+bestMoveStr);
+                        System.out.println("bestmove "+bestMoveStr);
                     }else if (content[0].equalsIgnoreCase("play")){
                         String bestMoveStr = engine.cvtMove(engine.getBestMove());
                         String side = engine.getTurn() == 'w' ? "white" : "black";

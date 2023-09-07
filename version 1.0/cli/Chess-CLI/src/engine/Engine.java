@@ -42,6 +42,7 @@ public class Engine {
         if(!legal){
             return fen;
         }
+        System.out.println();
         history=fen;
         lastMove=Util.cvtMove(move);
         halfMove++;
@@ -793,7 +794,7 @@ public class Engine {
 
     public ArrayList<int[]> getLegalMoves(){
         ArrayList<int[]> legalMoves = new ArrayList<>();
-        ArrayList<int[]> pieceMoves = new ArrayList<>();
+        ArrayList<int[]> pieceMoves;
         for(int i=0;i<Constants.COLUMNS;i++){
             for(int j=0;j<Constants.ROWS;j++){
                 if(board[i][j]!=Constants.EMPTY_CHAR){
