@@ -1,0 +1,9 @@
+cd engine
+del *.class
+cd ..
+cd util
+del *.class
+cd ..
+cd schneizel
+del *.class
+cd ..

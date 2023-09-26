@@ -1,0 +1,8 @@
+Normal move=from(file-index/rank-index)/to(file-index/rank-index)/piece_on_to_square/castling fen/en-passant/halfmove clock
+0102/ /KQkq/-/1,0112/q/Kk/-/1 **max length is 17** **min length is 13**
+castling=O-O-O/previous_castling/en-passant/halfmove clock O-O/previous_castling/en-passant/halfmove clock
+O-O-O/KQkq/-/1 **max length is 17** **min length is 11**, O-O/KQ/-/1 **max length is 14** **min length is 9**
+promotion=Normal move/promotion **this is case sensitive**
+[Normal move]/Q **max length is 19** **min length is 15**
+en-passant=[Normal move]/"en" **max length is 20** **min length is 14**
+moves must be separated by commas while listing, like so: 0102/ /KQkq/-/1,0112/q/Kk/-/1
