@@ -1,7 +1,7 @@
 
 # Schneizel Chess Engine
 
-### **A UCI chess engine written in Java.**
+### **A UCI complient chess engine written in Java.**
 
 
 ## Features
