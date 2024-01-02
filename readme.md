@@ -23,7 +23,7 @@
  - Iterative deepening
  - Internal move ordering
  - Transposition table (caches legal moves, capture moves and evalutation)
- - Quiscence search
+ - Quiescence search
 
 ### Evaluation
  - Piece square table
